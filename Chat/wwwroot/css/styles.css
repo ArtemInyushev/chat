@@ -153,3 +153,16 @@ input.input_form:focus {
     outline: none;
     border-bottom: 1px solid rgba(44, 210, 240, 0.596);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white !important;
+    transition: background-color 50000s;
+}
