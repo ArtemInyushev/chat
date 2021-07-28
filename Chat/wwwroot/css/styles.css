@@ -12,7 +12,7 @@ header {
     height: 15%;
     width: 100%;
     display: inline-flex;
-    border: 2px solid yellow;
+    border-bottom: 3px solid rgba(44, 210, 240, 0.596);
 }
 
 section.left_header {
@@ -21,7 +21,6 @@ section.left_header {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid yellow;
 }
 
 section.name {
@@ -30,7 +29,6 @@ section.name {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid yellow;
 }
 
 section.right_header {
@@ -39,20 +37,17 @@ section.right_header {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid yellow;
 }
 
-article.main_page {
+article.content_flex {
     width: 100%;
     display: inline-flex;
     height: 100%;
-    border: 2px solid yellow;
 }
 
 article.content {
     width: 100%;
     height: 85%;
-    border: 2px solid yellow;
 }
 
 article.registration_form {
@@ -64,16 +59,21 @@ article.registration_form {
     border: 2px solid yellow;
 }
 
-section.left {
+section.main_left {
     width: 30%;
     height: 100%;
     border: 2px solid yellow;
 }
 
-section.right {
+section.main_right {
     width: 70%;
     height: 100%;
     border: 2px solid yellow;
+}
+
+section.half_size {
+    width: 50%;
+    height: 100%;
 }
 
 section.login_form {
@@ -82,14 +82,25 @@ section.login_form {
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
-    border: 2px solid yellow;
+}
+
+section.create_form {
+    height: 85%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.float_right {
+    float: right
 }
 
 .blackground {
     background-color: black;
 }
 
-.darkground, ul.dropdown-menu {
+.darkground, ul.dropdown-menu, .form-check input:checked {
     background-color: rgba(20, 20, 20, 1);
 }
 
@@ -105,8 +116,22 @@ section.login_form {
     text-align: center;
 }
 
+.create_header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
 .margin_bottom {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.margin_top {
+    margin-top: 30px;
+}
+
+.flex {
+    display: flex;
 }
 
 img.login {
@@ -117,14 +142,14 @@ img.login {
     margin-top: 20px;
 }
 
-input.input_from {
+input.input_form {
     width: 100%;
     height: 50px;
     border: none;
     border-bottom: 1px solid white;
 }
 
-input.blackground:focus {
+input.input_form:focus {
     outline: none;
     border-bottom: 1px solid rgba(44, 210, 240, 0.596);
 }
