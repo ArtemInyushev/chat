@@ -1,3 +1,4 @@
+using Chat.Models;
 using Chat.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace Chat {
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddControllersWithViews();
+            services.AddScoped<DatabaseManager>();
             //services.AddControllers().AddNewtonsoftJson();
         }
 
