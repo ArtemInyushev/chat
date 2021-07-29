@@ -1,4 +1,4 @@
-using Chat.Models;
+using Chat.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +27,7 @@ namespace Chat {
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddControllersWithViews();
+            //services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

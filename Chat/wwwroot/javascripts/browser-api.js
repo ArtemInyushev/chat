@@ -1,4 +1,4 @@
-﻿async function CreateUser(e) {
+﻿async function GetNewUser(e) {
     e.preventDefault();
 
     const password = document.getElementById("password").value;
@@ -11,6 +11,8 @@
     const email = document.getElementById("email").value;
     const remember = document.getElementById("remember").checked;
     console.log(username, email, password, remember);
+
+    AddUser(username, email, password);
 
     const html = await fetch("/templates/Main.html").then(x => x.text());
     //UpdateContent(html);

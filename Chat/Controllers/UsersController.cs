@@ -1,4 +1,5 @@
 ﻿using Chat.Models;
+using Chat.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,7 +16,8 @@ namespace Chat.Controllers {
             db = context;
         }
         [HttpPost("")]
-        public async Task<int> AddUser(string name, string email, string password) {
+        public async Task<int> AddUser([FromBody] NewUserModel newUserModel) {
+            User user = new User();
             //action to add user
             //List<User> users = await db.Users.ToListAsync();
             return await Task.Run(() => 1);
