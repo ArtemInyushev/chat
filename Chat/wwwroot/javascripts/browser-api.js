@@ -2,6 +2,10 @@
     GoToLoginPage();
 }
 
+$(document).ready(function () {
+    $('.toast').toast('show');
+});
+
 async function GetNewUser(e) {
     e.preventDefault();
     const register_button = document.getElementById("register");
@@ -25,19 +29,22 @@ async function GetNewUser(e) {
     };
     const res = await AddUser(data);
     const status = res.status;
-    const text = await res.text();
+    const user = await res.json();
     if (status === 201) {
-        const id = parseInt(text);
-        console.log(typeof (id), id);
+        console.log(typeof(user), user);
         GoToMainPage();
     }
     else if (status === 403) {
-        console.log(text);
+        console.log(user);
         register_button.disabled = false;
     }
     else {
-        console.log("Something got wrong", text);
+        console.log("Something got wrong", user);
     }
+}
+
+function LogoutAction() {
+    GoToLoginPage();
 }
 
 function GoToMainPage() {

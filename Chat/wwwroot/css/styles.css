@@ -50,12 +50,12 @@ article.content {
     height: 85%;
 }
 
-article.registration_form {
-    height: 70%;
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
+article.notifications {
+    width: 30%;
+    height: 85%;
+    position: absolute;
+    right: 0;
+    z-index: -1;
     border: 2px solid yellow;
 }
 

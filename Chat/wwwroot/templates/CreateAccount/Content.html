@@ -9,19 +9,21 @@
 
                 <div class="margin_bottom">
                     <label class="turquoise"><i class="fas fa-user"></i> Username</label>
-                    <input type="text" class="input_form blackground white" id="username" maxlength="30" minlength="5" required>
+                    <input type="text" class="input_form blackground white" id="username" maxlength="30" minlength="3"
+                           pattern="[\w_]+" title="Username can contain only letters, digits and underscores" required>
                 </div>
                 <div class="margin_bottom">
                     <label class="turquoise"><i class="fas fa-user"></i> Email</label>
-                    <input type="email" class="input_form blackground white" id="email" maxlength="30" required>
+                    <input type="email" class="input_form blackground white" id="email" maxlength="50" required>
                 </div>
                 <div class="margin_bottom">
                     <label class="turquoise"><i class="fas fa-user"></i> Password</label>
-                    <input type="password" class="input_form blackground white" id="password" maxlength="30" minlength="6" required>
+                    <input type="password" class="input_form blackground white" id="password" maxlength="30" minlength="6"
+                           pattern="[\w_]+" title="Username can contain only letters, digits and underscores" required>
                 </div>
                 <div class="margin_bottom">
                     <label class="turquoise"><i class="fas fa-user"></i> Confirm Password</label>
-                    <input type="password" class="input_form blackground white" id="confirm" maxlength="30" required>
+                    <input type="password" class="input_form blackground white" id="confirm" maxlength="30" minlength="6" required>
                 </div>
 
                 <div class="form-check">

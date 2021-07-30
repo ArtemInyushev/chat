@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Chat.Repository {
     public partial class DatabaseManager {
-        public async Task<bool> AuthenticateUser(User user) {
-            return await Task.Run(() => true);
+        public async Task<User> AuthenticateUser(string username, string password) {
+            return await Task.Run(() => new User());
         }
         public async Task<string> CheckUserDuplicate(string username, string email) {
             User user = await (from u in this.db.Users

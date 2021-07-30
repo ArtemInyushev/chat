@@ -16,7 +16,6 @@ namespace Chat.Controllers {
             repository = rep;
         }
         [HttpPost("")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> AddUser([FromBody] NewUserModel newUserModel) {
             string res = await repository.CheckUserDuplicate(newUserModel.Username, newUserModel.Email);
             if (!string.IsNullOrEmpty(res)) {
@@ -29,7 +28,7 @@ namespace Chat.Controllers {
             user.RegisteredAt = DateTime.Now;
             //action to add user
             //List<User> users = await db.Users.ToListAsync();
-            return StatusCode(201, 1);
+            return StatusCode(201, user);
         }
     }
 }
