@@ -12,9 +12,9 @@ function UpdateRightHeader(html) {
 
 function LoadMainPage() {
     Promise.all([
-        fetch("/templates/Main.html").then(x => x.text()),
-        fetch("/templates/LeftHeader.html").then(x => x.text()),
-        fetch("/templates/RightHeader.html").then(x => x.text()),
+        fetch("/templates/Main/Content.html").then(x => x.text()),
+        fetch("/templates/Main/LeftHeader.html").then(x => x.text()),
+        fetch("/templates/Main/RightHeader.html").then(x => x.text()),
     ])
     .then(([mainHTML, leftHeaderHTML, rightHeaderHTMl]) => {
         UpdateContent(mainHTML);

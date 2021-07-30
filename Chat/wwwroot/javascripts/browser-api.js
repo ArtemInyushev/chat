@@ -29,6 +29,7 @@
     }
     else if (status === 403) {
         console.log(text);
+        register_button.disabled = false;
     }
     else {
         console.log("Something got wrong", text);
