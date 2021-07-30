@@ -1,9 +1,4 @@
-﻿async function AddUser(username, email, password) {
-    const data = {
-        "Username": username,
-        "Email": email,
-        "Password": password
-    }
+﻿async function AddUser(data) {
     const fetchOptions = {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -18,8 +13,11 @@
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type"
     };
-    console.log(fetchOptions.body);
 
-    const id = await fetch("api/Users", fetchOptions).then(x => x.text());
-    console.log(id);
+    try {
+        return await fetch("api/Users", fetchOptions);
+    }
+    catch (error) {
+        console.log(error);
+    }
 }

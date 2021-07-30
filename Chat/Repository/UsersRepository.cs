@@ -15,10 +15,10 @@ namespace Chat.Repository {
                                where u.Email == email ||
                                u.Username == username
                                select new User { Username = u.Username, Email = u.Email}).FirstOrDefaultAsync();
-            if(user.Username == username) {
+            if(user?.Username == username) {
                 return "This username is already used";
             }
-            else if(user.Email == email) {
+            else if(user?.Email == email) {
                 return "This email is already used";
             }
             return "";

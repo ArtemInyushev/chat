@@ -11,13 +11,17 @@ namespace Chat.Controllers {
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : Controller {
-        private DatabaseManager db;
-        public UsersController(DatabaseManager database) {
-            db = database;
+        private DatabaseManager repository;
+        public UsersController(DatabaseManager rep) {
+            repository = rep;
         }
         [HttpPost("")]
-        public async Task<int> AddUser([FromBody] NewUserModel newUserModel) {
-            string res = await db.CheckUserDuplicate(newUserModel.Username, newUserModel.Email);
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<IActionResult> AddUser([FromBody] NewUserModel newUserModel) {
+            string res = await repository.CheckUserDuplicate(newUserModel.Username, newUserModel.Email);
+            if (!string.IsNullOrEmpty(res)) {
+                return StatusCode(403, res);
+            }
 
             User user = new User();
             user.Username = newUserModel.Username;
@@ -25,7 +29,7 @@ namespace Chat.Controllers {
             user.RegisteredAt = DateTime.Now;
             //action to add user
             //List<User> users = await db.Users.ToListAsync();
-            return await Task.Run(() => 1);
+            return StatusCode(201, 1);
         }
     }
 }

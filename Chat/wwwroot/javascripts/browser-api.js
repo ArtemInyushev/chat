@@ -1,5 +1,7 @@
 ﻿async function GetNewUser(e) {
     e.preventDefault();
+    const register_button = document.getElementById("register");
+    register_button.disabled = true;
 
     const password = document.getElementById("password").value;
     const confirm = document.getElementById("confirm").value;
@@ -12,8 +14,23 @@
     const remember = document.getElementById("remember").checked;
     console.log(username, email, password, remember);
 
-    AddUser(username, email, password);
-
-    const html = await fetch("/templates/Main.html").then(x => x.text());
-    //UpdateContent(html);
+    const data = {
+        "Username": username,
+        "Email": email,
+        "Password": password
+    };
+    const res = await AddUser(data);
+    const status = res.status;
+    const text = await res.text();
+    if (status === 201) {
+        const id = parseInt(text);
+        console.log(typeof (id), id);
+        LoadMainPage();
+    }
+    else if (status === 403) {
+        console.log(text);
+    }
+    else {
+        console.log("Something got wrong", text);
+    }
 }
