@@ -166,3 +166,7 @@ select:-webkit-autofill:focus {
     -webkit-text-fill-color: white !important;
     transition: background-color 50000s;
 }
+
+a:hover {
+    cursor: pointer;
+}

@@ -1,4 +1,8 @@
-﻿async function GetNewUser(e) {
+﻿window.onload = function () {
+    GoToLoginPage();
+}
+
+async function GetNewUser(e) {
     e.preventDefault();
     const register_button = document.getElementById("register");
     register_button.disabled = true;
@@ -25,7 +29,7 @@
     if (status === 201) {
         const id = parseInt(text);
         console.log(typeof (id), id);
-        LoadMainPage();
+        GoToMainPage();
     }
     else if (status === 403) {
         console.log(text);
@@ -34,4 +38,16 @@
     else {
         console.log("Something got wrong", text);
     }
+}
+
+function GoToMainPage() {
+    RenderMainPage();
+}
+
+function GoToLoginPage() {
+    RenderLoginPage();
+}
+
+function GoToCreateAccountPage() {
+    RenderCreateAccountPage();
 }
