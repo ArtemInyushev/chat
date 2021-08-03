@@ -50,15 +50,6 @@ article.content {
     height: 85%;
 }
 
-article.notifications {
-    width: 30%;
-    height: 85%;
-    position: absolute;
-    right: 0;
-    z-index: -1;
-    border: 2px solid yellow;
-}
-
 section.main_left {
     width: 30%;
     height: 100%;

@@ -1,13 +1,13 @@
 ﻿function UpdateContent(html) {
-    document.getElementsByClassName("content")[0].innerHTML = html;
+    $(".content").html(html);
 }
 
 function UpdateLeftHeader(html) {
-    document.getElementsByClassName("left_header")[0].innerHTML = html;
+    $(".left_header").html(html);
 }
 
 function UpdateRightHeader(html) {
-    document.getElementsByClassName("right_header")[0].innerHTML = html;
+    $(".right_header").html(html);
 }
 
 function RenderMainPage() {
@@ -46,4 +46,22 @@ function RenderCreateAccountPage() {
         UpdateRightHeader("");
     })
     .catch(err => console.error(err));
+}
+
+function ShowToastMessage(title, body, titleClass) {
+    const lastToast = $(".toast.hide").last();
+    if (!lastToast) {
+        lastToast = $(".toast").last();
+    }
+    UpdateToastMessageData(lastToast, title, body, titleClass);
+    lastToast.toast("show");
+}
+
+function UpdateToastMessageData(toast, title, body, titleClass) {
+    const titleEl = toast.find("strong");
+    titleEl.text(title);
+    if (titleClass) {
+        titleEl.addClass(titleClass);
+    }
+    toast.find(".toast-body").text(body);
 }
