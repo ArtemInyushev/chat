@@ -49,19 +49,26 @@ function RenderCreateAccountPage() {
 }
 
 function ShowToastMessage(title, body, titleClass) {
-    const lastToast = $(".toast.hide").last();
-    if (!lastToast) {
-        lastToast = $(".toast").last();
+    let toastEl = $(".toast.hide").last();
+    if (!toastEl.length) {
+        toastEl = $(".toast").last();
     }
-    UpdateToastMessageData(lastToast, title, body, titleClass);
-    lastToast.toast("show");
+    $('.toast-container').prepend(toastEl);
+    UpdateToastMessage(toastEl, title, body, titleClass);
+    toastEl.toast({ delay: 10000 });
+    toastEl.toast("show");
 }
 
-function UpdateToastMessageData(toast, title, body, titleClass) {
+function UpdateToastMessage(toast, title, body, titleClass) {
     const titleEl = toast.find("strong");
     titleEl.text(title);
     if (titleClass) {
-        titleEl.addClass(titleClass);
+        if (!titleEl.hasClass(titleClass)) {
+            titleEl.removeClass(function (index, className) {
+                return (className.match(/(^|\s)text-\S+/g) || []).join(' ');
+            });
+            titleEl.addClass(titleClass);
+        }        
     }
     toast.find(".toast-body").text(body);
 }

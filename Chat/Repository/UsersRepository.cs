@@ -23,5 +23,15 @@ namespace Chat.Repository {
             }
             return "";
         }
+        public async Task<long> AddUser(User user) {
+            this.db.Users.Add(user);
+            await this.db.SaveChangesAsync();
+            return user.Id;
+        }
+        public async Task<User> GetUserById(int id) {
+            return await (from u in this.db.Users
+                         where u.Id == id
+                         select u).FirstOrDefaultAsync();
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Chat.Models {
     public class User {
-        public Int64 Id { get; set; }
+        public long Id { get; set; }
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public DateTime RegisteredAt { get; set; }

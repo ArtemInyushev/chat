@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Chat.Controllers {
@@ -26,8 +28,10 @@ namespace Chat.Controllers {
             user.Username = newUserModel.Username;
             user.Email = newUserModel.Email;
             user.RegisteredAt = DateTime.Now;
-            //action to add user
-            //List<User> users = await db.Users.ToListAsync();
+            using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(newUserModel.Password, Encoding.ASCII.GetBytes("sflpr9fhi2"))) {
+                user.PasswordHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(30));
+            }
+            user.Id = await this.repository.AddUser(user);
             return StatusCode(201, user);
         }
     }

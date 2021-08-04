@@ -18,7 +18,7 @@
 }
 
 async function NewToastMessage(title, body, titleClass) {
-    ShowToastMessage(title, body, "text-danger");
+    ShowToastMessage(title, body, titleClass);
 }
 
 //async function ShowToastMessage() {
@@ -58,14 +58,18 @@ async function GetNewUser(e) {
     const res = await AddUser(data);
     const status = res.status;
     if (status === 201) {
-        //const user = await res.json();
+        const user = await res.json();
+        console.log(user);
         GoToMainPage();
+        return;
     }
-    else if (status === 403) {
-        register_button.prop("disabled", false);
+
+    register_button.prop("disabled", false);
+    if (status === 403) {
+        NewToastMessage("Warning", await res.text(), "text-warning");
     }
     else {
-        console.log("Something got wrong");
+        NewToastMessage("Error", await res.text(), "text-danger");
     }
 }
 
