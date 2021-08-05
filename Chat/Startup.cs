@@ -1,5 +1,6 @@
 using Chat.Models;
 using Chat.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Chat {
@@ -22,14 +25,42 @@ namespace Chat {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            string salt = _configuration.GetValue<string>("PasswordSalt");
             string connection = _configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connection));
 
+            string secret = _configuration.GetValue<string>("Secret");
+            services.AddScoped<AuthOptions>(options => new AuthOptions(secret));
+            AuthOptions authOptions = new AuthOptions(secret);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => {
+                    options.RequireHttpsMetadata = false; // set to true when deploy
+                    options.TokenValidationParameters = new TokenValidationParameters {
+                        // укзывает, будет ли валидироваться издатель при валидации токена
+                        ValidateIssuer = true,
+                        // строка, представляющая издателя
+                        ValidIssuer = authOptions.ISSUER,
+
+                        // будет ли валидироваться потребитель токена
+                        ValidateAudience = true,
+                        // установка потребителя токена
+                        ValidAudience = authOptions.AUDIENCE,
+                        // будет ли валидироваться время существования
+                        ValidateLifetime = true,
+
+                        // установка ключа безопасности
+                        IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
+                        // валидация ключа безопасности
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
+
+            string passwordSalt = _configuration.GetValue<string>("PasswordSalt");
+            services.AddScoped<DatabaseManager>(options => new DatabaseManager(
+                options.GetService<ApplicationContext>(), options.GetService<AuthOptions>(), passwordSalt));
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddControllersWithViews();
-            services.AddScoped<DatabaseManager>();
             //services.AddControllers().AddNewtonsoftJson();
         }
 
@@ -40,6 +71,16 @@ namespace Chat {
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.Use(async (context, next) =>
+            {
+                var token = context.Request.Cookies[".AspNetCore.User.Id"];
+                if (!string.IsNullOrEmpty(token))
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+
+                await next();
+            });
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseMvc();
             //app.UseWebSockets();
         }

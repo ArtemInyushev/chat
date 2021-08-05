@@ -1,17 +1,14 @@
 ﻿using Chat.Models;
 using Chat.Repository;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Chat.Controllers {
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize]
     public class UsersController : Controller {
         private DatabaseManager repository;
         public UsersController(DatabaseManager rep) {
@@ -28,11 +25,17 @@ namespace Chat.Controllers {
             user.Username = newUserModel.Username;
             user.Email = newUserModel.Email;
             user.RegisteredAt = DateTime.Now;
-            using (var rfc2898DeriveBytes = new Rfc2898DeriveBytes(newUserModel.Password, Encoding.ASCII.GetBytes("sflpr9fhi2"))) {
-                user.PasswordHash = Convert.ToBase64String(rfc2898DeriveBytes.GetBytes(30));
-            }
-            user.Id = await this.repository.AddUser(user);
+            user.PasswordHash = this.repository.HashPassword(newUserModel.Password);
+            //user.Id = await this.repository.AddUser(user);
+
+            string token = this.repository.GetUserToken(user.Id);
+            Response.Cookies.Append(".AspNetCore.User.Id", token);
             return StatusCode(201, user);
+        }
+        [HttpGet("")]
+        [Authorize]
+        public async Task<IActionResult> GetAllUsers() {
+            return StatusCode(200, $"Ваш логин: {User.Identity.Name}");
         }
     }
 }
