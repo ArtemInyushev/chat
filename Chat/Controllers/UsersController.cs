@@ -22,6 +22,14 @@ namespace Chat.Controllers {
                 IsEssential = true,
             });
         }
+        [HttpGet("Authenticate")]
+        public async Task<IActionResult> AuthenticateUser() {
+            if (!String.IsNullOrEmpty(User.Identity.Name)) {
+                return StatusCode(200);
+            }
+            return StatusCode(401);
+
+        }
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserModel loginUserModel, [FromServices] CookieModel cookie) {
             User user = await this.repository.CheckIfUserExists(loginUserModel.Username, this.repository.HashPassword(loginUserModel.Password));
@@ -49,11 +57,6 @@ namespace Chat.Controllers {
             string token = this.repository.GetUserToken(user.Id);
             SetToken(token, cookie.CookieName);
             return StatusCode(201, user);
-        }
-        [HttpGet("")]
-        [Authorize]
-        public async Task<IActionResult> GetAllUsers() {
-            return StatusCode(200, $"Ваш логин: {User.Identity.Name}");
         }
     }
 }

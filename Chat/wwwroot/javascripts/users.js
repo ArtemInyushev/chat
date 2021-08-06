@@ -16,6 +16,21 @@
     return fetchOptions;
 }
 
+async function AuthenticateUser() {
+    const res = await fetch("api/Users/Authenticate");
+    const status = res.status;
+    if (status === 200) {
+        return true;
+    }
+    else if (status == 401) {
+        return false;
+    }
+    else {
+        console.log("Something went wrong");
+        return false;
+    }
+}
+
 async function LoginUser(data) {
     const fetchOptions = GetFetchOptions(data);
     try {

@@ -1,5 +1,10 @@
-﻿window.onload = function () {
-    GoToLoginPage();
+﻿window.onload = async function () {
+    if (await AuthenticateUser()) {
+        GoToMainPage();
+    }
+    else {
+        GoToLoginPage();
+    }
 
     //$(".toast").toast({ autohide: false });
     //$(".toast").toast("show");
