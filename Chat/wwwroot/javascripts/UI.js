@@ -48,18 +48,18 @@ function RenderCreateAccountPage() {
     .catch(err => console.error(err));
 }
 
-function ShowToastMessage(title, body, titleClass) {
+async function ShowToastMessage(title, body, titleClass) {
     let toastEl = $(".toast.hide").last();
     if (!toastEl.length) {
         toastEl = $(".toast").last();
     }
     $('.toast-container').prepend(toastEl);
-    UpdateToastMessage(toastEl, title, body, titleClass);
+    await UpdateToastMessage(toastEl, title, body, titleClass);
     toastEl.toast({ delay: 10000 });
     toastEl.toast("show");
 }
 
-function UpdateToastMessage(toast, title, body, titleClass) {
+async function UpdateToastMessage(toast, title, body, titleClass) {
     const titleEl = toast.find("strong");
     titleEl.text(title);
     if (titleClass) {

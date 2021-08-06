@@ -17,21 +17,36 @@
     //}, 2000);
 }
 
-async function NewToastMessage(title, body, titleClass) {
-    ShowToastMessage(title, body, titleClass);
+async function LoginAction(e) {
+    e.preventDefault();
+    const login_button = $(":submit");
+    login_button.prop("disabled", true);
+
+    const username = $(":text").val();
+    const password = $(":password").val();
+    const remember = $(":checkbox").is(":checked");
+    console.log(username, password, remember);
+    const data = {
+        "Username": username,
+        "Password": password,
+    }
+    const res = await LoginUser(data);
+    const status = res.status;
+    if (status === 200) {
+        const user = await res.json();
+        console.log(user);
+        GoToMainPage();
+        return;
+    }
+    else {
+        login_button.prop("disabled", false);
+        await ShowToastMessage("Error", await res.text(), "text-danger");
+    }
 }
 
-//async function ShowToastMessage() {
-//    const toastHTML = await fetch("/templates/Additional/Toast.html").then(x => x.text());
-//    const newToastEl = jQuery("<div/>").html(toastHTML);
-//    $('.toast-container').prepend(newToastEl);
-
-//    const toastMessage = newToastEl.find(".toast");
-//    toastMessage.toast({ autohide: false });
-//    toastMessage.toast('show');
-
-//    setTimeout(() => toastMessage.toast("hide"), 2000);
-//}
+async function LogoutAction() {
+    GoToLoginPage();
+}
 
 async function GetNewUser(e) {
     e.preventDefault();
@@ -41,7 +56,7 @@ async function GetNewUser(e) {
     const password = $("#password").val();
     const confirm = $("#confirm").val();
     if (password != confirm) {
-        NewToastMessage("Error", "Passwords aren't the same", "text-danger");
+        await ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
         register_button.prop("disabled", false);
         return;
     }
@@ -66,15 +81,11 @@ async function GetNewUser(e) {
 
     register_button.prop("disabled", false);
     if (status === 403) {
-        NewToastMessage("Warning", await res.text(), "text-warning");
+        await ShowToastMessage("Warning", await res.text(), "text-warning");
     }
     else {
-        NewToastMessage("Error", await res.text(), "text-danger");
+        await ShowToastMessage("Error", await res.text(), "text-danger");
     }
-}
-
-function LogoutAction() {
-    GoToLoginPage();
 }
 
 function GoToMainPage() {

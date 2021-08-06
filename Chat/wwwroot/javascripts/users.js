@@ -1,4 +1,4 @@
-﻿async function AddUser(data) {
+﻿function GetFetchOptions(data) {
     const fetchOptions = {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, cors, *same-origin
@@ -13,7 +13,21 @@
         referrer: "no-referrer", // no-referrer, *client
         body: JSON.stringify(data), // body data type must match "Content-Type"
     };
+    return fetchOptions;
+}
 
+async function LoginUser(data) {
+    const fetchOptions = GetFetchOptions(data);
+    try {
+        return await fetch("api/Users/Login", fetchOptions);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+async function AddUser(data) {
+    const fetchOptions = GetFetchOptions(data);
     try {
         return await fetch("api/Users", fetchOptions);
     }

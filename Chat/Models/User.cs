@@ -12,6 +12,10 @@ namespace Chat.Models {
         public string LogoUrl { get; set; }
         public string Email { get; set; }
     }
+    public class LoginUserModel {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
     public class NewUserModel {
         public string Username { get; set; }
         public string Email { get; set; }

@@ -1,3 +1,4 @@
+using Chat.Middlewares;
 using Chat.Models;
 using Chat.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -29,7 +30,11 @@ namespace Chat {
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(connection));
 
-            string secret = _configuration.GetValue<string>("Secret");
+            IConfigurationSection tokenSection = _configuration.GetSection("JWTToken");
+            string cookieName = tokenSection.GetValue<string>("CookieName");
+            services.AddSingleton<CookieModel>(OptionsBuilderConfigurationExtensions => new CookieModel(cookieName));
+
+            string secret = tokenSection.GetValue<string>("Secret");
             services.AddScoped<AuthOptions>(options => new AuthOptions(secret));
             AuthOptions authOptions = new AuthOptions(secret);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -71,18 +76,9 @@ namespace Chat {
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.Use(async (context, next) =>
-            {
-                var token = context.Request.Cookies[".AspNetCore.User.Id"];
-                if (!string.IsNullOrEmpty(token))
-                    context.Request.Headers.Add("Authorization", "Bearer " + token);
-
-                await next();
-            });
+            app.UseJWTCookiesMiddleware();
             app.UseAuthentication();
-            app.UseAuthorization();
             app.UseMvc();
-            //app.UseWebSockets();
         }
     }
 }

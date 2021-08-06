@@ -19,8 +19,8 @@ namespace Chat.Repository {
             }
             return hash;
         }
-        public async Task<bool> CheckIfUserExists(string username, string passwordHash) {
-            return await this.db.Users.AnyAsync(u => u.Username == username && u.PasswordHash == passwordHash);
+        public async Task<User> CheckIfUserExists(string username, string passwordHash) {
+            return await this.db.Users.FirstOrDefaultAsync(u => u.Username == username && u.PasswordHash == passwordHash);
         }
         public async Task<string> CheckUserDuplicate(string username, string email) {
             User user = await this.db.Users.FirstOrDefaultAsync(u => u.Email == email || u.Username == username);
@@ -55,9 +55,7 @@ namespace Chat.Repository {
             return user.Id;
         }
         public async Task<User> GetUserById(int id) {
-            return await (from u in this.db.Users
-                         where u.Id == id
-                         select u).FirstOrDefaultAsync();
+            return await this.db.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }
