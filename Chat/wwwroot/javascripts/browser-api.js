@@ -34,6 +34,7 @@ async function LoginAction(e) {
     const data = {
         "Username": username,
         "Password": password,
+        "RememberMe": remember,
     }
     const res = await LoginUser(data);
     const status = res.status;
@@ -73,7 +74,8 @@ async function GetNewUser(e) {
     const data = {
         "Username": username,
         "Email": email,
-        "Password": password
+        "Password": password,
+        "RememberMe": remember,
     };
     const res = await AddUser(data);
     const status = res.status;

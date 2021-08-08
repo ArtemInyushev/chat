@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace Chat.Controllers {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
     public class UsersController : Controller {
         private DatabaseManager repository;
         public UsersController(DatabaseManager rep) {
@@ -25,9 +24,9 @@ namespace Chat.Controllers {
         [HttpGet("Authenticate")]
         public async Task<IActionResult> AuthenticateUser() {
             if (!String.IsNullOrEmpty(User.Identity.Name)) {
-                return StatusCode(200);
+                return await Task.FromResult(StatusCode(200));
             }
-            return StatusCode(401);
+            return await Task.FromResult(StatusCode(401));
 
         }
         [HttpPost("Login")]
@@ -36,9 +35,15 @@ namespace Chat.Controllers {
             if(user == null) {
                 return StatusCode(401, "Wrong credentials");
             }
-            string token = this.repository.GetUserToken(user.Id);
+            string token = this.repository.GetUserToken(user.Id, loginUserModel.RememberMe);
             SetToken(token, cookie.CookieName);
             return StatusCode(200, user);
+        }
+        [HttpPost("Logout")]
+        [Authorize]
+        public async Task<IActionResult> LogoutUser([FromServices] CookieModel cookie) {
+            Response.Cookies.Delete(cookie.CookieName);
+            return await Task.FromResult(StatusCode(200));
         }
         [HttpPost("")]
         public async Task<IActionResult> AddUser([FromBody] NewUserModel newUserModel, [FromServices] CookieModel cookie) {
@@ -52,9 +57,9 @@ namespace Chat.Controllers {
             user.Email = newUserModel.Email;
             user.RegisteredAt = DateTime.Now;
             user.PasswordHash = this.repository.HashPassword(newUserModel.Password);
-            //user.Id = await this.repository.AddUser(user);
+            user.Id = await this.repository.AddUser(user);
 
-            string token = this.repository.GetUserToken(user.Id);
+            string token = this.repository.GetUserToken(user.Id, newUserModel.RememberMe);
             SetToken(token, cookie.CookieName);
             return StatusCode(201, user);
         }

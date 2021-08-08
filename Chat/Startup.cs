@@ -41,21 +41,14 @@ namespace Chat {
                 .AddJwtBearer(options => {
                     options.RequireHttpsMetadata = false; // set to true when deploy
                     options.TokenValidationParameters = new TokenValidationParameters {
-                        // укзывает, будет ли валидироваться издатель при валидации токена
                         ValidateIssuer = true,
-                        // строка, представляющая издателя
                         ValidIssuer = authOptions.ISSUER,
 
-                        // будет ли валидироваться потребитель токена
                         ValidateAudience = true,
-                        // установка потребителя токена
                         ValidAudience = authOptions.AUDIENCE,
-                        // будет ли валидироваться время существования
                         ValidateLifetime = true,
 
-                        // установка ключа безопасности
                         IssuerSigningKey = authOptions.GetSymmetricSecurityKey(),
-                        // валидация ключа безопасности
                         ValidateIssuerSigningKey = true,
                     };
                 });

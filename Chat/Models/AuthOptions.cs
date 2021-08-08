@@ -13,7 +13,7 @@ namespace Chat.Models {
         public readonly string ISSUER = "MyAuthServer"; // издатель токена
         public readonly string AUDIENCE = "MyAuthClient"; // потребитель токена
         private readonly string KEY = String.Empty;
-        public readonly int LIFETIME = 1; // время жизни токена - 1 минута
+        public readonly int LIFETIME_MONTH = 1; // время жизни токена - 1 месяц
         public SymmetricSecurityKey GetSymmetricSecurityKey() {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
         }
