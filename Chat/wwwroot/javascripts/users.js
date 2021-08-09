@@ -41,6 +41,17 @@ async function LoginUser(data) {
     }
 }
 
+async function LogoutUser() {
+    const res = await fetch("api/Users/Logout");
+    if (res.status === 200) {
+        return true;
+    }
+    else {
+        console.log("Logout error");
+        return false;
+    }
+}
+
 async function AddUser(data) {
     const fetchOptions = GetFetchOptions(data);
     try {

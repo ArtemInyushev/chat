@@ -22,6 +22,13 @@
     //}, 2000);
 }
 
+window.onbeforeunload = function (e) {
+    window.onunload = function () {
+        localStorage.setItem("Hello", "world!");
+    }
+    localStorage.setItem("Hello", "not world!");
+};
+
 async function LoginAction(e) {
     e.preventDefault();
     const login_button = $(":submit");
@@ -51,6 +58,7 @@ async function LoginAction(e) {
 }
 
 async function LogoutAction() {
+    await LogoutUser();
     GoToLoginPage();
 }
 

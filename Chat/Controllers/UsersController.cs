@@ -39,10 +39,10 @@ namespace Chat.Controllers {
             SetToken(token, cookie.CookieName);
             return StatusCode(200, user);
         }
-        [HttpPost("Logout")]
-        [Authorize]
+        [HttpGet("Logout")]
         public async Task<IActionResult> LogoutUser([FromServices] CookieModel cookie) {
             Response.Cookies.Delete(cookie.CookieName);
+            Response.Cookies.Delete("Hello");
             return await Task.FromResult(StatusCode(200));
         }
         [HttpPost("")]
