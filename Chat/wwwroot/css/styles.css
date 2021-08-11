@@ -12,7 +12,7 @@ header {
     height: 15%;
     width: 100%;
     display: inline-flex;
-    border-bottom: 3px solid rgba(44, 210, 240, 0.596);
+    border-bottom: 2px solid rgba(44, 210, 240, 0.596);
 }
 
 section.left_header {
@@ -51,15 +51,14 @@ article.content {
 }
 
 section.main_left {
-    width: 30%;
     height: 100%;
-    border: 2px solid yellow;
+    width: 25%;
+    border-right: 2px solid rgba(44, 210, 240, 0.596);
 }
 
 section.main_right {
-    width: 70%;
     height: 100%;
-    border: 2px solid yellow;
+    width: 75%;
 }
 
 section.half_size {
@@ -81,6 +80,21 @@ section.create_form {
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
+}
+
+section.user_search {
+    height: 7%;
+    width: 100%;
+    border-bottom: 2px solid rgba(44, 210, 240, 0.596);
+}
+
+section.all_users {
+    margin-top: 15px;
+}
+
+div.search_icon {
+    width: 7%;
+    margin-top: 2%;
 }
 
 .float_right {
@@ -125,6 +139,18 @@ section.create_form {
     display: flex;
 }
 
+label.inline {
+    display: flex;
+    flex-direction: row;
+}
+
+label.inline:before, label.inline:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 0.5px solid rgba(44, 210, 240, 0.596);
+    margin: auto;
+}
+
 img.login {
     height: 30%;
     display: block;
@@ -143,6 +169,15 @@ input.input_form {
 input.input_form:focus {
     outline: none;
     border-bottom: 1px solid rgba(44, 210, 240, 0.596);
+}
+
+input.search_input {
+    width: 85%;
+    border: none;
+}
+
+input.search_input:focus {
+    outline: none;
 }
 
 input:-webkit-autofill,
