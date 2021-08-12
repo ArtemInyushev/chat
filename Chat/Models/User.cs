@@ -23,4 +23,14 @@ namespace Chat.Models {
         public string Password { get; set; }
         public bool RememberMe { get; set; }
     }
+    public class UserDataModel {
+        public UserDataModel(string username, string url, string email) {
+            Username = username;
+            LogoUrl = url;
+            Email = email;
+        }
+        public string Username { get; set; }
+        public string LogoUrl { get; set; }
+        public string Email { get; set; }
+    }
 }

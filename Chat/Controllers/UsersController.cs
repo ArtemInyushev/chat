@@ -37,7 +37,8 @@ namespace Chat.Controllers {
             }
             string token = this.repository.GetUserToken(user.Id, loginUserModel.RememberMe);
             SetToken(token, cookie.CookieName);
-            return StatusCode(200, user);
+            UserDataModel userData = new UserDataModel(user.Username, user.LogoUrl, user.Email);
+            return StatusCode(200, userData);
         }
         [HttpGet("Logout")]
         public async Task<IActionResult> LogoutUser([FromServices] CookieModel cookie) {
@@ -61,7 +62,8 @@ namespace Chat.Controllers {
 
             string token = this.repository.GetUserToken(user.Id, newUserModel.RememberMe);
             SetToken(token, cookie.CookieName);
-            return StatusCode(201, user);
+            UserDataModel userData = new UserDataModel(user.Username, user.LogoUrl, user.Email);
+            return StatusCode(201, userData);
         }
     }
 }

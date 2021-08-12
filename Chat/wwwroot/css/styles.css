@@ -89,12 +89,37 @@ section.user_search {
 }
 
 section.all_users {
-    margin-top: 15px;
+    width: 100%;
+}
+
+section.chat {
+    height:50px;
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 30px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+section.chat_image {
+    height: 100%;
+    width: 15%;
+}
+
+section.chat_info {
+    height: 100%;
+    width: 70%;
+}
+
+section.chat_additional {
+    height: 100%;
+    width: 15%;
 }
 
 div.search_icon {
-    width: 7%;
-    margin-top: 2%;
+    width: 10%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .float_right {
@@ -111,6 +136,10 @@ div.search_icon {
 
 .turquoise {
     color: rgba(44, 210, 240, 0.596);
+}
+
+.lightgrey {
+    color: lightgrey;
 }
 
 .white, button.white_text {
@@ -140,6 +169,8 @@ div.search_icon {
 }
 
 label.inline {
+    margin-top: 15px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: row;
 }
@@ -157,6 +188,11 @@ img.login {
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+}
+
+img.rounded_img {
+    height: 100%;
+    border-radius: 30px;
 }
 
 input.input_form {

@@ -22,13 +22,6 @@
     //}, 2000);
 }
 
-window.onbeforeunload = function (e) {
-    window.onunload = function () {
-        localStorage.setItem("Hello", "world!");
-    }
-    localStorage.setItem("Hello", "not world!");
-};
-
 async function LoginAction(e) {
     e.preventDefault();
     const login_button = $(":submit");
@@ -37,7 +30,6 @@ async function LoginAction(e) {
     const username = $(":text").val();
     const password = $(":password").val();
     const remember = $(":checkbox").is(":checked");
-    console.log(username, password, remember);
     const data = {
         "Username": username,
         "Password": password,
@@ -47,7 +39,17 @@ async function LoginAction(e) {
     const status = res.status;
     if (status === 200) {
         const user = await res.json();
-        console.log(user);
+
+        let storage;
+        if (remember) {
+            storage = localStorage;
+        }
+        else {
+            storage = sessionStorage;
+        }
+        storage.setItem("username", user.username ? user.username : "");
+        storage.setItem("email", user.email ? user.email : "");
+        storage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
         GoToMainPage();
         return;
     }
