@@ -1,6 +1,6 @@
 ﻿window.onload = async function () {
     if (await AuthenticateUser()) {
-        GoToMainPage();
+        RenderMainPage();
     }
     else {
         GoToLoginPage();
@@ -50,7 +50,7 @@ async function LoginAction(e) {
         storage.setItem("username", user.username ? user.username : "");
         storage.setItem("email", user.email ? user.email : "");
         storage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
-        GoToMainPage();
+        RenderMainPage();
         return;
     }
     else {
@@ -92,7 +92,7 @@ async function GetNewUser(e) {
     if (status === 201) {
         const user = await res.json();
         console.log(user);
-        GoToMainPage();
+        RenderMainPage();
         return;
     }
 
@@ -103,10 +103,6 @@ async function GetNewUser(e) {
     else {
         await ShowToastMessage("Error", await res.text(), "text-danger");
     }
-}
-
-function GoToMainPage() {
-    RenderMainPage();
 }
 
 function GoToLoginPage() {

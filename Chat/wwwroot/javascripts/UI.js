@@ -12,9 +12,9 @@ function UpdateRightHeader(html) {
 
 function RenderMainPage() {
     Promise.all([
-        fetch("/templates/Main/Content.html").then(x => x.text()),
-        fetch("/templates/Main/LeftHeader.html").then(x => x.text()),
-        fetch("/templates/Main/RightHeader.html").then(x => x.text()),
+        fetch("/Templates/Main/Content.html").then(x => x.text()),
+        fetch("/Templates/Main/LeftHeader.html").then(x => x.text()),
+        fetch("/Templates/Main/RightHeader.html").then(x => x.text()),
     ])
     .then(([mainHTML, leftHeaderHTML, rightHeaderHTMl]) => {
         UpdateContent(mainHTML);
@@ -25,7 +25,7 @@ function RenderMainPage() {
 }
 
 function RenderLoginPage() {
-    fetch("/templates/Login/Content.html")
+    fetch("/Templates/Login/Content.html")
     .then(x => x.text())
     .then(html => {
         UpdateContent(html);
@@ -37,8 +37,8 @@ function RenderLoginPage() {
 
 function RenderCreateAccountPage() {
     Promise.all([
-        fetch("/templates/CreateAccount/Content.html").then(x => x.text()),
-        fetch("/templates/CreateAccount/LeftHeader.html").then(x => x.text()),
+        fetch("/Templates/CreateAccount/Content.html").then(x => x.text()),
+        fetch("/Templates/CreateAccount/LeftHeader.html").then(x => x.text()),
     ])
     .then(([mainHTML, leftHeaderHTML]) => {
         UpdateContent(mainHTML);
