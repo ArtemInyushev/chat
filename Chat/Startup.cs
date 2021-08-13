@@ -57,9 +57,9 @@ namespace Chat {
             services.AddScoped<DatabaseManager>(options => new DatabaseManager(
                 options.GetService<ApplicationContext>(), options.GetService<AuthOptions>(), passwordSalt));
 
+            services.AddCors();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddControllersWithViews();
-            //services.AddControllers().AddNewtonsoftJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +69,7 @@ namespace Chat {
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseJWTCookiesMiddleware();
             app.UseAuthentication();
             app.UseMvc();
