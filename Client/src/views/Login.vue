@@ -1,5 +1,15 @@
 <template>
-    <div class="login">
+    <div class="fullsize">
+        <header>
+            <section class="left_header"></section>
+    
+            <section class="name">
+                <h1 class="display-2 turquoise">My chat</h1>
+            </section>
+    
+            <section class="right_header"></section>
+        </header>
+
         <img src="https://res.cloudinary.com/duzykfess/image/upload/v1627071932/Chat/lock_inmjg5.jpg" class="login" />
 
         <section class="login_form">
@@ -15,7 +25,7 @@
                     <input type="submit" class="btn btn-outline-light " value="Log in" />
                 </div>
 
-                <a class="link-light" onclick="GoToCreateAccountPage()">Create Account</a>
+                <a href="/register" class="link-light">Create Account</a>
             </form>
         </section>
     </div>
