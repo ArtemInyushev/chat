@@ -69,7 +69,19 @@ namespace Chat {
             }
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(builder => {
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+                builder.AllowCredentials();
+                builder.SetIsOriginAllowed(origin => {
+                    if (string.IsNullOrWhiteSpace(origin)) return false;
+                    // Only add this to allow testing with localhost, remove this line in production!
+                    if (origin.ToLower().StartsWith("http://localhost")) return true;
+                    // Insert your production domain here.
+                    if (origin.ToLower().StartsWith("https://dev.mydomain.com")) return true;
+                    return false;
+                });
+            });
             app.UseJWTCookiesMiddleware();
             app.UseAuthentication();
             app.UseMvc();

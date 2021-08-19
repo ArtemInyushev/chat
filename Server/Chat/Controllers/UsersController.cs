@@ -16,13 +16,15 @@ namespace Chat.Controllers {
         }
         private void SetToken(string token, string cookieName) {
             Response.Cookies.Append(cookieName, token, new CookieOptions {
-                HttpOnly = true,
+                HttpOnly = false,
                 Secure = true,
                 IsEssential = true,
-            });
+                SameSite = SameSiteMode.None,
+        });
         }
         [HttpGet("Authenticate")]
         public async Task<IActionResult> AuthenticateUser() {
+            //todo remove useless lines
             if (!String.IsNullOrEmpty(User.Identity.Name)) {
                 return await Task.FromResult(StatusCode(200));
             }
