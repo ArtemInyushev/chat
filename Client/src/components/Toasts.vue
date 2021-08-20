@@ -1,5 +1,5 @@
 <template>
-    <div class="toast-container position-relative top-0 end-0 w-25">
+    <div class="toast-container position-fixed end-0 w-25">
         <div class="toast w-100 hide" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header bg-dark text-white">
                 <img src="https://res.cloudinary.com/duzykfess/image/upload/v1627997941/Chat/0276e7e10311f0f161c5c38a2d7b8008_qqgv8k.jpg" class="rounded me-2" height="16" alt="...">

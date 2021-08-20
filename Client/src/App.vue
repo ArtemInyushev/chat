@@ -11,8 +11,8 @@
 				<router-view name="right" />
 			</section>
 		</header>
-		<router-view/>
 		<Toasts />
+		<router-view/>
 	</div>
 </template>
 
