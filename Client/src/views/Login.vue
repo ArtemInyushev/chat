@@ -1,15 +1,5 @@
 <template>
-    <div class="fullsize">
-        <header>
-            <section class="left_header"></section>
-    
-            <section class="name">
-                <h1 class="display-2 turquoise">My chat</h1>
-            </section>
-    
-            <section class="right_header"></section>
-        </header>
-
+    <article class="content">
         <img src="https://res.cloudinary.com/duzykfess/image/upload/v1627071932/Chat/lock_inmjg5.jpg" class="login" />
 
         <section class="login_form">
@@ -30,7 +20,7 @@
                 <a href="/register" class="link-light">Create Account</a>
             </form>
         </section>
-    </div>
+    </article>
 </template>
 
 <script>

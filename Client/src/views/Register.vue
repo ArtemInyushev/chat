@@ -1,5 +1,5 @@
 <template>
-	<div class="fullsize">
+	<article class="content">
 		<header>
             <section class="left_header">
 				<a href="/login">
@@ -52,7 +52,7 @@
 				</section>
 			</section>
 		</article>
-	</div>
+	</article>
 </template>
 
 <script>

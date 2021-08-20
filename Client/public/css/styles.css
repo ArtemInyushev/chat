@@ -1,0 +1,239 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+header {
+    height: 15%;
+    width: 100%;
+    display: inline-flex;
+    border-bottom: 2px solid rgba(44, 210, 240, 0.596);
+}
+
+section.left_header {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.name {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.right_header {
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+article.content_flex {
+    width: 100%;
+    display: inline-flex;
+    height: 100%;
+}
+
+article.content {
+    width: 100%;
+    height: 85%;
+}
+
+section.main_left {
+    height: 100%;
+    width: 25%;
+    border-right: 2px solid rgba(44, 210, 240, 0.596);
+}
+
+section.main_right {
+    height: 100%;
+    width: 75%;
+}
+
+section.half_size {
+    width: 50%;
+    height: 100%;
+}
+
+section.login_form {
+    height: 55%;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+section.create_form {
+    height: 85%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+section.user_search {
+    height: 7%;
+    width: 100%;
+    border-bottom: 2px solid rgba(44, 210, 240, 0.596);
+}
+
+section.all_users {
+    width: 100%;
+}
+
+section.chat {
+    height:50px;
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 30px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
+section.chat_image {
+    height: 100%;
+    width: 15%;
+}
+
+section.chat_info {
+    height: 100%;
+    width: 70%;
+}
+
+section.chat_additional {
+    height: 100%;
+    width: 15%;
+}
+
+div.fullsize {
+    height: 100%;
+    width: 100%;
+}
+
+div.search_icon {
+    width: 10%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.float_right {
+    float: right
+}
+
+.blackground {
+    background-color: black;
+}
+
+.darkground, ul.dropdown-menu, .form-check input:checked {
+    background-color: rgba(20, 20, 20, 1);
+}
+
+.turquoise {
+    color: rgba(44, 210, 240, 0.596);
+}
+
+.lightgrey {
+    color: lightgrey;
+}
+
+.white, button.white_text {
+    color: white;
+}
+
+.centered_text {
+    text-align: center;
+}
+
+.create_header {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+}
+
+.margin_bottom {
+    margin-bottom: 10px;
+}
+
+.margin_top {
+    margin-top: 30px;
+}
+
+.flex {
+    display: flex;
+}
+
+label.inline {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+}
+
+label.inline:before, label.inline:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 0.5px solid rgba(44, 210, 240, 0.596);
+    margin: auto;
+}
+
+img.login {
+    height: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+img.rounded_img {
+    height: 100%;
+    border-radius: 30px;
+}
+
+input.input_form {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+input.input_form:focus {
+    outline: none;
+    border-bottom: 1px solid rgba(44, 210, 240, 0.596);
+}
+
+input.search_input {
+    width: 85%;
+    border: none;
+}
+
+input.search_input:focus {
+    outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-text-fill-color: white !important;
+    transition: background-color 50000s;
+}
+
+a:hover {
+    cursor: pointer;
+}
