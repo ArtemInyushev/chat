@@ -48,7 +48,15 @@ router.beforeEach(async (to, from, next) => {
 		}
     }
 	else {
-        next()
+        if (await Users.AuthenticateUser() === true){
+			next({
+                path: '/',
+                params: { nextUrl: to.fullPath }
+            });
+		}
+		else {
+			next();
+		}
     }
 });
 

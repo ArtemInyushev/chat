@@ -1,4 +1,4 @@
-class Users {
+class User {
     static GetFetchOptions(data) {
         const fetchOptions = {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -47,6 +47,30 @@ class Users {
             console.log(error);
         }
     }
+
+    static async AddUser(username, email, password, remember){
+        const data = {
+            "Username": username,
+            "Email": email,
+            "Password": password,
+            "RememberMe": remember,
+        };
+        const fetchOptions = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json; charset=utf-8',
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: JSON.stringify(data),
+        };
+        try {
+            return await fetch("https://localhost:44360/api/Users", fetchOptions);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
 }
 
-export default Users;
+export default User;
