@@ -40,6 +40,8 @@ export default {
     },
     methods: {
         login: async function(e) {
+            console.log(document.getElementById("app").innerHTML);
+            console.log("hello");
             e.preventDefault();
             this.isDisabled = true;
             const res = await User.LoginUser(this.name, this.password, this.remember);

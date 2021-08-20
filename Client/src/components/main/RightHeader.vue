@@ -15,10 +15,30 @@
                     </div>
                     <div class="modal-footer border-primary darkground">
                         <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Go back</button>
-                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" onclick="LogoutAction()">Log out</button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" v-on:click="logout">Log out</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+import User from '../../assets/js/users';
+import router from '../../router/index';
+import Toast from '../../../public/js/toasts';
+
+export default {
+	name: 'RightHeader',
+	methods: {
+		logout: async function() {
+            if(await User.LogoutUser()){
+                router.go("Login");
+            }
+            else{
+                Toast.ShowToastMessage("Error", "Mistake during logout", "text-danger");
+            }
+		}
+	}
+}
+</script>

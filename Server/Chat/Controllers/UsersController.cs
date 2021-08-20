@@ -16,7 +16,7 @@ namespace Chat.Controllers {
         }
         private void SetToken(string token, string cookieName) {
             Response.Cookies.Append(cookieName, token, new CookieOptions {
-                HttpOnly = false,
+                HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
                 SameSite = SameSiteMode.None,
@@ -44,7 +44,11 @@ namespace Chat.Controllers {
         }
         [HttpGet("Logout")]
         public async Task<IActionResult> LogoutUser([FromServices] CookieModel cookie) {
-            Response.Cookies.Delete(cookie.CookieName);
+            CookieOptions options = new CookieOptions{
+                Secure = true,
+                SameSite = SameSiteMode.None,
+            };
+            Response.Cookies.Delete(cookie.CookieName, options);
             return await Task.FromResult(StatusCode(200));
         }
         [HttpPost("")]

@@ -10,7 +10,7 @@
 				</section>
 				<section class="all_users">
 					<label class="inline white">All users</label>
-					<section class="chat flex" onclick="alert('hello');">
+					<section class="chat flex">
 						<section class="chat_image">
 							<img src="https://res.cloudinary.com/duzykfess/image/upload/v1628780843/Chat/user_aga0w2.png" class="rounded_img" alt="...">
 						</section>
@@ -43,15 +43,3 @@
 		</article>
 	</article>
 </template>
-
-<script>
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-	name: 'Home',
-	components: {
-		//HelloWorld
-	}
-}
-</script>
