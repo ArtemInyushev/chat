@@ -4,9 +4,7 @@
 			<section class="left_header">
 				<router-view name="left" />
 			</section>
-
 			<Logo />
-
 			<section class="right_header">
 				<router-view name="right" />
 			</section>

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import Users from '../assets/js/users';
 
 Vue.use(VueRouter);
@@ -9,7 +8,11 @@ const routes = [
 	{
 		path: '/',
 		name: 'Home',
-		component: Home,
+		components: {
+			default: () => import('../views/Home.vue'),
+			left: () => import('../components/main/LeftHeader.vue'),
+			right: () => import('../components/main/RightHeader.vue'),
+		},
 		meta: {
 			requiresAuth: true
 		}
@@ -18,7 +21,7 @@ const routes = [
 		path: '/login',
 		name: 'Login',
 		components: {
-			default: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+			default: () => import('../views/Login.vue'),
 			left: "",
 			right: "",
 		}
@@ -26,10 +29,11 @@ const routes = [
 	{
 		path: '/register',
 		name: 'Register',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+		components: {
+			default: () => import('../views/Register.vue'),
+			left: () => import('../components/register/LeftHeader.vue'),
+			right: "",
+		}
 	},
 ];
 

@@ -3,8 +3,6 @@
 window.onload = async function () {
     console.log("hello");
     await ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
-    await ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
-    await ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
 }
 
 async function ShowToastMessage(title, body, titleClass) {

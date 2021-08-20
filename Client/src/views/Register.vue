@@ -1,19 +1,5 @@
 <template>
 	<article class="content">
-		<header>
-            <section class="left_header">
-				<a href="/login">
-					<button type="button" class="btn btn-outline-light">Go back to Login</button>
-				</a>
-			</section>
-    
-            <section class="name">
-                <h1 class="display-2 turquoise">My chat</h1>
-            </section>
-    
-            <section class="right_header"></section>
-        </header>
-
 		<article class="content_flex">
 			<section class="half_size flex">
 				<h1 class="display-1 centered_text create_header white">Create Account<br> Now</h1>
