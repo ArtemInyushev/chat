@@ -26,6 +26,7 @@
 <script>
 import User from '../assets/js/users';
 import router from '../router/index';
+import Toast from '../../public/js/toasts';
 
 export default {
     name: "Login",
@@ -61,7 +62,7 @@ export default {
             }
             else {
                 this.isDisabled = false;
-                //await ShowToastMessage("Error", await res.text(), "text-danger");
+                Toast.ShowToastMessage("Error", await res.text(), "text-danger");
             }
         }
     }

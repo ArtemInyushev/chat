@@ -44,6 +44,7 @@
 <script>
 import User from '../assets/js/users';
 import router from '../router/index';
+import Toast from '../../public/js/toasts';
 
 export default {
 	name: "Register",
@@ -62,11 +63,12 @@ export default {
 			e.preventDefault();
 			this.isDisabled = true;
 			if(this.password !== this.confirm) {
-				// await ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
+				Toast.ShowToastMessage("Error", "Passwords aren't the same", "text-danger");
 				this.isDisabled = false;
 				return;
 			}
 			const res = await User.AddUser(this.username, this.email, this.password, this.remember);
+			const status = res.status;
 			if (status === 201) {
 				const user = await res.json();
 				console.log(user);
@@ -76,10 +78,10 @@ export default {
 
 			this.isDisabled = false;
 			if (status === 403) {
-				//await ShowToastMessage("Warning", await res.text(), "text-warning");
+				Toast.ShowToastMessage("Warning", await res.text(), "text-warning");
 			}
 			else {
-				//await ShowToastMessage("Error", await res.text(), "text-danger");
+				Toast.ShowToastMessage("Error", await res.text(), "text-danger");
 			}
 		}
 	},
