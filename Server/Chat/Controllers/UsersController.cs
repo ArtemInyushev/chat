@@ -33,7 +33,6 @@ namespace Chat.Controllers {
                 return await Task.FromResult(StatusCode(200));
             }
             return await Task.FromResult(StatusCode(401));
-
         }
         [HttpPost("Login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserModel loginUserModel, [FromServices] CookieModel cookie) {

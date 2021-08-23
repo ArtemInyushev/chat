@@ -6,7 +6,8 @@
 					<div class="search_icon centered_text">
 						<i class="fas fa-search fa-lg"></i>
 					</div>
-					<input class="search_input blackground white" type="text" placeholder="Search"  maxlength="25"/>
+					<input class="search_input blackground white" type="text" 
+						@input="getNameFilterWithDelay" placeholder="Search" maxlength="25"/>
 				</section>
 				<section class="all_users">
 					<label class="inline white">All users</label>
@@ -43,3 +44,29 @@
 		</article>
 	</article>
 </template>
+
+<script>
+export default {
+	name: "Main",
+	data: function() {
+		return {
+			nameFilter: "",
+			delay: null,
+		};
+	},
+	computed: {
+
+	},
+	methods: {
+		getNameFilterWithDelay(e) {
+			clearTimeout(this.delay);
+			this.delay = setTimeout(() => {
+				this.nameFilter = e.target.value.toLowerCase().trim();
+			}, 1000);
+		},
+	},
+	//watch: {
+	//	nameFilter: function(val) { console.log(val); }
+	//}
+}
+</script>
