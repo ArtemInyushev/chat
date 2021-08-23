@@ -43,7 +43,6 @@
 
 <script>
 import User from '../assets/js/users';
-import router from '../router/index';
 import Toast from '../../public/js/toasts';
 
 export default {
@@ -72,7 +71,7 @@ export default {
 			if (status === 201) {
 				const user = await res.json();
 				console.log(user);
-				router.go("Home");
+				this.$router.go("Home");
 				return;
 			}
 

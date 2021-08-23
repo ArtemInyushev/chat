@@ -25,7 +25,6 @@
 
 <script>
 import User from '../assets/js/users';
-import router from '../router/index';
 import Toast from '../../public/js/toasts';
 
 export default {
@@ -40,8 +39,6 @@ export default {
     },
     methods: {
         login: async function(e) {
-            console.log(document.getElementById("app").innerHTML);
-            console.log("hello");
             e.preventDefault();
             this.isDisabled = true;
             const res = await User.LoginUser(this.name, this.password, this.remember);
@@ -59,7 +56,7 @@ export default {
                 storage.setItem("username", user.username ? user.username : "");
                 storage.setItem("email", user.email ? user.email : "");
                 storage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
-                router.go("Home");
+                this.$router.go("Home");
                 return;
             }
             else {

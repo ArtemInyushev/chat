@@ -1,19 +1,24 @@
 class User {
     static async AuthenticateUser(){
-        const res = await fetch("https://localhost:44360/api/Users/Authenticate", {
-            credentials: "include",
-        });
-        const status = res.status;
-        if (status === 200) {
-            return true;
+        try {
+            const res = await fetch("https://localhost:44360/api/Users/Authenticate", {
+                credentials: "include",
+            });
+            const status = res.status;
+            if (status === 200) {
+                return true;
+            }
+            else if (status === 401) {
+                return false;
+            }
+            else {
+                console.log("Something went wrong");
+                return false;
+            }
         }
-        else if (status === 401) {
-            return false;
-        }
-        else {
-            console.log("Something went wrong");
-            return false;
-        }
+        catch(error) {
+            console.log(error);
+        }        
     }
 
     static async LoginUser(username, password, remember){
@@ -40,15 +45,20 @@ class User {
     }
 
     static async LogoutUser(){
-        const res = await fetch("https://localhost:44360/api/Users/Logout", {
+        try {
+            const res = await fetch("https://localhost:44360/api/Users/Logout", {
             credentials: "include",
-        });
-        if (res.status === 200) {
-            return true;
+            });
+            if (res.status === 200) {
+                return true;
+            }
+            else {
+                console.log("Logout error");
+                return false;
+            }
         }
-        else {
-            console.log("Logout error");
-            return false;
+        catch (error) {
+            console.log(error);
         }
     }
 

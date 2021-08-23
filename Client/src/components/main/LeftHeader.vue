@@ -6,7 +6,7 @@
                 Settings
             </button>
             <ul class="dropdown-menu">
-                <li><h4 class="centered_text white" id="main_username">Username</h4></li>
+                <li><h4 class="centered_text white">{{ username }}</h4></li>
                 <li><button class="dropdown-item white_text">Change personal data</button></li>
                 <li><button class="dropdown-item white_text">Privacy</button></li>
                 <li>
@@ -51,3 +51,14 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    name: "Settings",
+    data: function() {
+        return {
+            username: this.$store.state.username,
+        };
+    },
+}
+</script>

@@ -14,13 +14,17 @@ namespace Chat.Controllers {
         public UsersController(DatabaseManager rep) {
             repository = rep;
         }
-        private void SetToken(string token, string cookieName) {
-            Response.Cookies.Append(cookieName, token, new CookieOptions {
+        private void SetToken(string token, string cookieName, bool remember) {
+            CookieOptions options = new CookieOptions {
                 HttpOnly = true,
                 Secure = true,
                 IsEssential = true,
                 SameSite = SameSiteMode.None,
-        });
+            };
+            if (remember) {
+                options.Expires = DateTimeOffset.UtcNow.AddMonths(3);
+            }
+            Response.Cookies.Append(cookieName, token, options);
         }
         [HttpGet("Authenticate")]
         public async Task<IActionResult> AuthenticateUser() {
@@ -38,7 +42,7 @@ namespace Chat.Controllers {
                 return StatusCode(401, "Wrong credentials");
             }
             string token = this.repository.GetUserToken(user.Id, loginUserModel.RememberMe);
-            SetToken(token, cookie.CookieName);
+            SetToken(token, cookie.CookieName, loginUserModel.RememberMe);
             UserDataModel userData = new UserDataModel(user.Username, user.LogoUrl, user.Email);
             return StatusCode(200, userData);
         }
@@ -66,7 +70,7 @@ namespace Chat.Controllers {
             user.Id = await this.repository.AddUser(user);
 
             string token = this.repository.GetUserToken(user.Id, newUserModel.RememberMe);
-            SetToken(token, cookie.CookieName);
+            SetToken(token, cookie.CookieName, newUserModel.RememberMe);
             UserDataModel userData = new UserDataModel(user.Username, user.LogoUrl, user.Email);
             return StatusCode(201, userData);
         }

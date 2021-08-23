@@ -25,7 +25,6 @@
 
 <script>
 import User from '../../assets/js/users';
-import router from '../../router/index';
 import Toast from '../../../public/js/toasts';
 
 export default {
@@ -33,7 +32,7 @@ export default {
 	methods: {
 		logout: async function() {
             if(await User.LogoutUser()){
-                router.go("Login");
+                this.$router.go("Login");
             }
             else{
                 Toast.ShowToastMessage("Error", "Mistake during logout", "text-danger");

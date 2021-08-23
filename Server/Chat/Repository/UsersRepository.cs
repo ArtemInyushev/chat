@@ -39,19 +39,12 @@ namespace Chat.Repository {
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
             DateTime now = DateTime.UtcNow;
-            DateTime expiresDate;
-            if (rememberMe) {
-                expiresDate = now.AddMonths(this.authOptions.LIFETIME_MONTH);
-            }
-            else {
-                expiresDate = now.AddMinutes(5);
-            }
             JwtSecurityToken jwt = new JwtSecurityToken(
                     issuer: this.authOptions.ISSUER,
                     audience: this.authOptions.AUDIENCE,
                     notBefore: now,
                     claims: claimsIdentity.Claims,
-                    expires: expiresDate,
+                    expires: now.AddMonths(this.authOptions.LIFETIME_MONTH),
                     signingCredentials: new SigningCredentials(this.authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256)); ; ;
             string encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             return encodedJwt;
