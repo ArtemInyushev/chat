@@ -10,7 +10,7 @@
 			</section>
 		</header>
 		<Toasts />
-		<router-view/>
+		<router-view />
 	</div>
 </template>
 
@@ -22,6 +22,11 @@ export default {
 	components: {
 		Toasts,
 		Logo,
-	}
+	},
+	/*methods: {
+		showToastMessage: async function(title, body, titleClass){
+			this.$emit('showToast', title, body, titleClass)
+		},
+	},*/
 }
 </script>
