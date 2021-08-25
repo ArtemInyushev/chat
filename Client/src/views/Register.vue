@@ -43,7 +43,7 @@
 
 <script>
 import User from '../assets/js/users';
-import Toast from '../../public/js/toasts';
+import Toast from '../assets/js/toasts';
 
 export default {
 	name: "Register",

@@ -50,14 +50,14 @@ export default {
             const toast = this.toasts[index];
             console.log(toast.id);
             toast.title = title;
-            toast.body = (Math.random() + 1).toString(36).substring(7);
+            toast.body = body;
             toast.titleClass = titleClass;
             toast.hidden = false;
             setTimeout(() => { toast.hidden = true}, 10000);
         }
     },
     created: function() {
-        this.$parent.$on('showToast', this.showToastMessage);
+        this.$on('showToast', this.showToastMessage);
     },
 }
 </script>

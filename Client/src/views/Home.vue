@@ -50,12 +50,18 @@ export default {
 	name: "Main",
 	data: function() {
 		return {
+			activeChats: [],
+			allChats: [],
 			nameFilter: "",
 			delay: null,
 		};
 	},
 	computed: {
-
+		filteredActiveChats: function() {
+			return this.nameFilter === "" 
+				? this.activeChats 
+				: this.activeChats.filter(x => x.username.toLowerCase().includes(this.nameFilter));
+		},
 	},
 	methods: {
 		getNameFilterWithDelay(e) {
@@ -65,8 +71,8 @@ export default {
 			}, 1000);
 		},
 	},
-	//watch: {
-	//	nameFilter: function(val) { console.log(val); }
-	//}
+	watch: {
+		nameFilter: function(val) { console.log(val); }
+	}
 }
 </script>
