@@ -12,9 +12,6 @@ const store = new Vuex.Store({
 		email: localStorage.getItem("email"),
 		logoUrl: localStorage.getItem("logoUrl"),
 	},
-	getters: {
-
-	},
 	mutations: {
 		setUsername(state, username) {
 			state.username = username;
@@ -31,6 +28,6 @@ const store = new Vuex.Store({
 
 new Vue({
     router,
-    store,
+    store: store,
     render: h => h(App)
 }).$mount('#app')

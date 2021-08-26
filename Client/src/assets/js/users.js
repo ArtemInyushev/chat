@@ -21,33 +21,10 @@ class User {
         }        
     }
 
-    static async LoginUser(username, password, remember){
-        const data = {
-            "Username": username,
-            "Password": password,
-            "RememberMe": remember,
-        };
-        const fetchOptions = {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json; charset=utf-8',
-                'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: JSON.stringify(data),
-        }
-        try {
-            return await fetch("https://localhost:44360/api/Users/Login", fetchOptions);
-        }
-        catch (error) {
-            console.log(error);
-        }
-    }
-
     static async LogoutUser(){
         try {
             const res = await fetch("https://localhost:44360/api/Users/Logout", {
-            credentials: "include",
+                credentials: "include",
             });
             if (res.status === 200) {
                 return true;

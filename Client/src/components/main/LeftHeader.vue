@@ -57,8 +57,14 @@ export default {
     name: "Settings",
     data: function() {
         return {
-            username: this.$store.state.username,
-        };
+            username1: this.$store.state.username,
+        }
     },
+    computed: {
+        username: function() {
+            console.log(this.$store.state.username);
+            return this.$store.state.username;
+        }
+    }
 }
 </script>

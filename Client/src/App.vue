@@ -17,6 +17,7 @@
 <script>
 import Toasts from '@/components/Toasts.vue';
 import Logo from '@/components/Logo.vue';
+
 export default {
 	name: "App",
 	components: {

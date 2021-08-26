@@ -6,7 +6,7 @@
             <form @submit="login">
                 <h1 class="display-4 centered_text white">Login</h1>
 
-                <input type="text" v-model="name" class="input_form blackground white margin_bottom" 
+                <input type="text" v-model="username" class="input_form blackground white margin_bottom" 
                     placeholder="Username..." maxlength="30" required>
                 <input type="password" v-model="password" class="input_form blackground white margin_bottom" 
                     placeholder="Password..." maxlength="30" required>
@@ -24,14 +24,13 @@
 </template>
 
 <script>
-import User from '../assets/js/users';
 import Toast from '../assets/js/toasts';
 
 export default {
     name: "Login",
     data: function() {
         return {
-            name: "",
+            username: "",
             password: "",
             remember: false,
             isDisabled: false,
@@ -41,21 +40,45 @@ export default {
         login: async function(e) {
             e.preventDefault();
             this.isDisabled = true;
-            const res = await User.LoginUser(this.name, this.password, this.remember);
+
+            const data = {
+                "Username": this.username,
+                "Password": this.password,
+                "RememberMe": this.remember,
+            };
+            const fetchOptions = {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    'Accept': 'application/json; charset=utf-8',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                },
+                body: JSON.stringify(data),
+            }
+
+            let res;
+            try {
+                res = await fetch("https://localhost:44360/api/Users/Login", fetchOptions);
+            }
+            catch (error) {
+                console.log(error);
+            }
+
             const status = res.status;
             if (status === 200) {
                 const user = await res.json();
 
-                let storage;
                 if (this.remember) {
-                    storage = localStorage;
+                    localStorage.setItem("username", user.username ? user.username : "");
+                    localStorage.setItem("email", user.email ? user.email : "");
+                    localStorage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
                 }
-                else {
-                    storage = sessionStorage;
-                }
-                storage.setItem("username", user.username ? user.username : "");
-                storage.setItem("email", user.email ? user.email : "");
-                storage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
+
+                //this.$store.commit('setUsername', user.username);
+                this.$store.dispatch('setUsername', {username: user.username})
+                this.$store.commit('setEmail', user.email);
+                this.$store.commit('setLogoUrl', user.logoUrl);
+
                 this.$router.go("Home");
                 return;
             }

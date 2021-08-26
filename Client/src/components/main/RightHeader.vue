@@ -32,6 +32,9 @@ export default {
 	methods: {
 		logout: async function() {
             if(await User.LogoutUser()){
+                localStorage.removeItem("username");
+                localStorage.removeItem("email");
+                localStorage.removeItem("logoUrl");
                 this.$router.go("Login");
             }
             else{
