@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import User from '../assets/js/users';
 import Toast from '../assets/js/toasts';
 
 export default {
@@ -66,11 +65,40 @@ export default {
 				this.isDisabled = false;
 				return;
 			}
-			const res = await User.AddUser(this.username, this.email, this.password, this.remember);
+			
+			const data = {
+				"Username": this.username,
+				"Email": this.email,
+				"Password": this.password,
+				"RememberMe": this.remember,
+			};
+			const fetchOptions = {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Accept': 'application/json; charset=utf-8',
+					'Content-Type': 'application/json; charset=UTF-8',
+				},
+				body: JSON.stringify(data),
+			};
+			
+			let res;
+			try {
+				res = await fetch("https://localhost:44360/api/Users", fetchOptions);
+			}
+			catch (error) {
+				console.log(error);
+				return;
+			}
+
 			const status = res.status;
 			if (status === 201) {
 				const user = await res.json();
-				console.log(user);
+				
+				localStorage.setItem("username", user.username ? user.username : "");
+                localStorage.setItem("email", user.email ? user.email : "");
+                localStorage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
+				
 				this.$router.go("Home");
 				return;
 			}

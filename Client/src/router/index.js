@@ -1,8 +1,26 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Users from '../assets/js/users';
 
 Vue.use(VueRouter);
+
+async function AuthenticateUser() {
+	try {
+		const res = await fetch("https://localhost:44360/api/Users/Authenticate", {
+			credentials: "include",
+		});
+		const status = res.status;
+		if (status === 200) {
+			return true;
+		}
+		else if (status !== 401) {
+			console.log("Something went wrong");
+		}
+	}
+	catch(error) {
+		console.log(error);
+	}
+	return false;
+}
 
 const routes = [
 	{
@@ -40,12 +58,12 @@ const routes = [
 const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
-	routes
+	routes,
 });
 
 router.beforeEach(async (to, from, next) => {
 	if(to.matched.some(record => record.meta.requiresAuth)) {
-        if (await Users.AuthenticateUser() === false) {
+        if (await AuthenticateUser() === false) {
             next({
                 path: '/login',
                 params: { nextUrl: to.fullPath }
@@ -56,7 +74,7 @@ router.beforeEach(async (to, from, next) => {
 		}
     }
 	else {
-        if (await Users.AuthenticateUser() === true){
+        if (await AuthenticateUser() === true){
 			next({
                 path: '/',
                 params: { nextUrl: to.fullPath }

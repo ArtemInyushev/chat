@@ -38,6 +38,7 @@ export default {
             }
             catch (error) {
                 console.log(error);
+                return;
             }
             if (res.status === 200) {
                 localStorage.removeItem("username");
