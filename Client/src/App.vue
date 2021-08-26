@@ -24,10 +24,5 @@ export default {
 		Toasts,
 		Logo,
 	},
-	/*methods: {
-		showToastMessage: async function(title, body, titleClass){
-			this.$emit('showToast', title, body, titleClass)
-		},
-	},*/
 }
 </script>

@@ -24,20 +24,29 @@
 </template>
 
 <script>
-import User from '../../assets/js/users';
 import Toast from '../../assets/js/toasts';
 
 export default {
 	name: 'RightHeader',
 	methods: {
 		logout: async function() {
-            if(await User.LogoutUser()){
+            let res;
+            try {
+                res = await fetch("https://localhost:44360/api/Users/Logout", {
+                    credentials: "include",
+                });
+            }
+            catch (error) {
+                console.log(error);
+            }
+            if (res.status === 200) {
                 localStorage.removeItem("username");
                 localStorage.removeItem("email");
                 localStorage.removeItem("logoUrl");
                 this.$router.go("Login");
             }
-            else{
+            else {
+                console.log("Logout error");
                 Toast.ShowToastMessage("Error", "Mistake during logout", "text-danger");
             }
 		}

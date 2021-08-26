@@ -57,14 +57,8 @@ export default {
     name: "Settings",
     data: function() {
         return {
-            username1: this.$store.state.username,
-        }
+            username: localStorage.getItem("username"),
+        };
     },
-    computed: {
-        username: function() {
-            console.log(this.$store.state.username);
-            return this.$store.state.username;
-        }
-    }
 }
 </script>

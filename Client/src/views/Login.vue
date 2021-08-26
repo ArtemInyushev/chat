@@ -67,17 +67,10 @@ export default {
             const status = res.status;
             if (status === 200) {
                 const user = await res.json();
-
-                if (this.remember) {
-                    localStorage.setItem("username", user.username ? user.username : "");
-                    localStorage.setItem("email", user.email ? user.email : "");
-                    localStorage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
-                }
-
-                //this.$store.commit('setUsername', user.username);
-                this.$store.dispatch('setUsername', {username: user.username})
-                this.$store.commit('setEmail', user.email);
-                this.$store.commit('setLogoUrl', user.logoUrl);
+                
+                localStorage.setItem("username", user.username ? user.username : "");
+                localStorage.setItem("email", user.email ? user.email : "");
+                localStorage.setItem("logoUrl", user.logoUrl ? user.logoUrl : "");
 
                 this.$router.go("Home");
                 return;
@@ -87,6 +80,6 @@ export default {
                 Toast.ShowToastMessage("Error", await res.text(), "text-danger");
             }
         }
-    }
+    },
 }
 </script>
