@@ -1,5 +1,6 @@
 using Chat.Middlewares;
 using Chat.Models;
+using Chat.Modules;
 using Chat.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,7 @@ namespace Chat {
 
             string secret = tokenSection.GetValue<string>("Secret");
             services.AddScoped<AuthOptions>(options => new AuthOptions(secret));
+
             AuthOptions authOptions = new AuthOptions(secret);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
@@ -58,8 +60,8 @@ namespace Chat {
                 options.GetService<ApplicationContext>(), options.GetService<AuthOptions>(), passwordSalt));
 
             services.AddCors();
+            services.AddSignalR();
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,8 +69,8 @@ namespace Chat {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStatusCodePages();
-            app.UseStaticFiles();
+            //app.UseStatusCodePages();
+            //app.UseStaticFiles();
             app.UseCors(builder => {
                 builder.AllowAnyMethod();
                 builder.AllowAnyHeader();
@@ -84,6 +86,9 @@ namespace Chat {
             });
             app.UseJWTCookiesMiddleware();
             app.UseAuthentication();
+            app.UseEndpoints(endpoints => {
+                endpoints.MapHub<ChatHub>("/chat");
+            });
             app.UseMvc();
         }
     }
