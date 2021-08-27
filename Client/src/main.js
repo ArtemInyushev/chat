@@ -1,11 +1,9 @@
 import Vue from 'vue';
-//import Vuex from 'vuex'
 import App from './App.vue';
 import router from './router';
 import VueSignalR from 'vue-signalr'
 
-//Vue.use(Vuex);
-Vue.use(VueSignalR, 'SOCKET_URL');
+Vue.use(VueSignalR, 'https:///localhost:44360/chat');
 Vue.config.productionTip = false; 
 
 new Vue({
