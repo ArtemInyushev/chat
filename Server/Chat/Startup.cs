@@ -86,6 +86,7 @@ namespace Chat {
             });
             app.UseJWTCookiesMiddleware();
             app.UseAuthentication();
+            app.UseRouting();
             app.UseEndpoints(endpoints => {
                 endpoints.MapHub<ChatHub>("/chat");
             });

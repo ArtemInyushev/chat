@@ -46,10 +46,13 @@
 </template>
 
 <script>
+import * as signalR from "@microsoft/signalr";
+
 export default {
 	name: "Main",
 	data: function() {
 		return {
+			hubConnection: null,
 			activeChats: [],
 			allChats: [],
 			nameFilter: "",
@@ -73,6 +76,13 @@ export default {
 	},
 	watch: {
 		nameFilter: function(val) { console.log(val); }
+	},
+	mounted: async function() {
+		this.hubConnection = new signalR.HubConnectionBuilder()
+			.withUrl("https://localhost:44360/chat")
+			.configureLogging(signalR.LogLevel.Information)
+			.build();
+		this.hubConnection.start();
 	}
 }
 </script>
